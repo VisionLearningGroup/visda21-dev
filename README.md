@@ -1,3 +1,20 @@
+
+## Visda 21
+
+Ovanet
+--
+python train.py --config ./configs/image_to_objectnet.yaml --source_data /research/diva2/donhk/imagenet/ILSVRC2012_train/ --target_data ./data_loader/filelist/objectnet_filelist.txt
+
+python train.py --config ./configs/image_to_imagenet_c_r.yaml --source_data /research/diva2/donhk/imagenet/ILSVRC2012_train/ --target_data ./data_loader/filelist/imagenet_c_and_r_filelist.txt.txt
+
+
+Pretrained model
+--
+python train_resnet.py --config ./configs/image_to_objectnet.yaml --source_data /research/diva2/donhk/imagenet/ILSVRC2012_train/ --target_data ./data_loader/filelist/objectnet_filelist.txt
+
+python train_resnet.py --config ./configs/image_to_imagenet_c_r.yaml --source_data /research/diva2/donhk/imagenet/ILSVRC2012_train/ --target_data ./data_loader/filelist/imagenet_c_and_r_filelist.txt.txt
+
+
 ## [OVANet: One-vs-All Network for Universal Domain Adaptation](https://arxiv.org/pdf/2104.03344.pdf)
 
 ![OVANet Overview](images/animation_ovanet.gif)
