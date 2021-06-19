@@ -1,6 +1,9 @@
 
 ## Visda 21
 
+## Dataset Preparation
+
+
 Ovanet
 --
 python train.py --config ./configs/image_to_objectnet.yaml --source_data /research/diva2/donhk/imagenet/ILSVRC2012_train/ --target_data ./data_loader/filelist/objectnet_filelist.txt
