@@ -31,10 +31,16 @@ Filelists (which contain a list of `<image_path> <class_label>`) for each can be
 
 Classes that do not overlap with the classes in Imagenet have been given a class-label of 1000.
 
+```
+<root>/val_data/imagenet_c_and_r/*
+<root>/val_data/imagenet_o/*
+<root>/val_data/objectnet/*
+```
+
 ## Evaluation Metrics
 
 1. [Accuracy](https://github.com/VisionLearningGroup/visda21-dev/blob/6b08d9600418d5a413d6f13459786a298ea6df87/eval.py#L75) on 1000 classes in ImageNet
-2. [ROC score](https://github.com/VisionLearningGroup/visda21-dev/blob/6b08d9600418d5a413d6f13459786a298ea6df87/eval.py#L76)  on open-set classes
+2. [ROC score](https://github.com/VisionLearningGroup/visda21-dev/blob/6b08d9600418d5a413d6f13459786a298ea6df87/eval.py#L76) to evaluate separation between known and unknown classes
 
 
 ## Baselines
@@ -50,14 +56,17 @@ Classes that do not overlap with the classes in Imagenet have been given a class
 
 python eval_pretrained_resnet.py --config ./configs/image_to_objectnet.yaml --source_data <imagenet_data_path>/ILSVRC2012_train/ --target_data ./data_prep_utils/val_filelists/objectnet_filelist.txt
 
--> ['step 0', 'acc close all 21.629429892141758', 'roc 0.5524634366827563']
-
 
 (2) ImageNet -> ImageNet-C,R,O:
 
 python eval_pretrained_resnet.py --config ./configs/image_to_imagenet_c_r_o.yaml --source_data <imagenet_data_path>/ILSVRC2012_train/ --target_data ./data_prep_utils/val_filelists/imagenet_c_r_o_filelist.txt
 
--> ['step 0', 'acc close all 36.03791030975497', 'roc 0.08619148444339521']
+
+
+|Target Dataset | Accuracy | ROC  |
+|:---: | :---: | :---:|
+| Object Net |21.6 | 55.2 |
+| ImageNet-R-C-O|  36.0 | 8.6 |
 
 ### [OVANet](https://arxiv.org/pdf/2104.03344.pdf)
 
