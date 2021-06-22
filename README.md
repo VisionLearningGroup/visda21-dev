@@ -74,10 +74,13 @@ In the paper, OVANet has one parameter (multi) to be tuned.
 
 (1) ImageNet -> ObjectNet:
 
-python eval_pretrained_resnet.py --config ./configs/image_to_objectnet.yaml --source_data <imagenet_data_path>/ILSVRC2012_train/ --target_data ./data_prep_utils/val_filelists/objectnet_filelist.txt --multi 0.1
+python eval_pretrained_resnet.py --config ./configs/image_to_objectnet.yaml --source_data <imagenet_data_path>/ILSVRC2012_train/ --target_data ./data_prep_utils/val_filelists/objectnet_filelist.txt 
 
 (2) ImageNet -> ImageNet-C,R,O:
 
-python eval_pretrained_resnet.py --config ./configs/image_to_imagenet_c_r_o.yaml --source_data <imagenet_data_path>/ILSVRC2012_train/ --target_data ./data_prep_utils/val_filelists/imagenet_c_r_o_filelist.txt --multi 0.1
+python eval_pretrained_resnet.py --config ./configs/image_to_imagenet_c_r_o.yaml --source_data <imagenet_data_path>/ILSVRC2012_train/ --target_data ./data_prep_utils/val_filelists/imagenet_c_r_o_filelist.txt
 
-
+|Target Dataset | Accuracy | ROC  |
+|:---: | :---: | :---:|
+| Object Net |   21.7 | 54.8 |
+| ImageNet-R-C-O| 35.3 | 15.3 |
