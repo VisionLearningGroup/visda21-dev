@@ -32,9 +32,9 @@ Filelists (which contain a list of `<image_path> <class_label>`) for each can be
 Classes that do not overlap with the classes in Imagenet have been given a class-label of 1000.
 
 ```
-<root>/val_data/imagenet_c_and_r
-<root>/val_data/imagenet_o/
-<root>/val_data/objectnet
+<root>/val_data/imagenet_c_and_r/*
+<root>/val_data/imagenet_o/*
+<root>/val_data/objectnet/*
 ```
 
 ## Evaluation Metrics
@@ -63,7 +63,7 @@ python eval_pretrained_resnet.py --config ./configs/image_to_imagenet_c_r_o.yaml
 
 
 
-|Dataset | Accuracy | ROC  |
+|Target Dataset | Accuracy | ROC  |
 |:---: | :---: | :---:|
 | Object Net |21.6 | 55.2 |
 | ImageNet-R-C-O|  36.0 | 8.6 |
