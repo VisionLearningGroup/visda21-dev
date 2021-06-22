@@ -62,11 +62,10 @@ python eval_pretrained_resnet.py --config ./configs/image_to_objectnet.yaml --so
 python eval_pretrained_resnet.py --config ./configs/image_to_imagenet_c_r_o.yaml --source_data <imagenet_data_path>/ILSVRC2012_train/ --target_data ./data_prep_utils/val_filelists/imagenet_c_r_o_filelist.txt
 
 
-
 |Target Dataset | Accuracy | ROC  |
 |:---: | :---: | :---:|
-| Object Net |21.6 | 55.2 |
-| ImageNet-R-C-O|  36.0 | 8.6 |
+| Object Net |21.6 | 55.5 |
+| ImageNet-R-C-O|  36.0 | 11.0 |
 
 ### [OVANet](https://arxiv.org/pdf/2104.03344.pdf)
 
