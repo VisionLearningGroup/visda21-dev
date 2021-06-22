@@ -29,19 +29,19 @@ def test(step, dataset_test, name, n_share, G, Cs,
             pred = out_t.data.max(1)[1]
             correct_close += pred.eq(label_t.data).cpu().sum()
             out_t = F.softmax(out_t)
-            entr = -torch.sum(out_t * torch.log(out_t), 1).data.cpu().numpy()
+            # entr = -torch.sum(out_t * torch.log(out_t), 1).data.cpu().numpy()
 
             if entropy:
                 pred_unk = -torch.sum(out_t * torch.log(out_t), 1)
-                ind_unk = np.where(entr > thr)[0]
+                # ind_unk = np.where(entr > thr)[0]
             else:
                 out_open = Cs[1](feat)
                 out_open = F.softmax(out_open.view(out_t.size(0), 2, -1),1)
                 tmp_range = torch.range(0, out_t.size(0)-1).long().cuda()
                 pred_unk = out_open[tmp_range, 0, pred]
-                ind_unk = np.where(pred_unk.data.cpu().numpy() > 0.5)[0]
+                # ind_unk = np.where(pred_unk.data.cpu().numpy() > 0.5)[0]
 
-            pred[ind_unk] = open_class
+            # pred[ind_unk] = open_class
             correct += pred.eq(label_t.data).cpu().sum()
             pred = pred.cpu().numpy()
             k = label_t.data.size()[0]
@@ -66,6 +66,7 @@ def test(step, dataset_test, name, n_share, G, Cs,
         roc = roc_auc_score(Y_test[:, -1], anomal_score)
     else:
         roc = 0.0
+
     logger = logging.getLogger(__name__)
     logging.basicConfig(filename=name, format="%(message)s")
     logger.setLevel(logging.INFO)
@@ -80,7 +81,7 @@ def test(step, dataset_test, name, n_share, G, Cs,
 
 
 def test_pretrained(step, dataset_test, name, n_share, G,
-         open=False, entropy=False, thr=None):
+         open=False, entropy=False, thr=None, prob=False, logit=False):
     G.eval()
 
     ## Known Score Calculation.
@@ -99,12 +100,18 @@ def test_pretrained(step, dataset_test, name, n_share, G,
             out_t = G(img_t)
             pred = out_t.data.max(1)[1]
             correct_close += pred.eq(label_t.data).cpu().sum()
+            logit_t = out_t
             out_t = F.softmax(out_t)
-            entr = -torch.sum(out_t * torch.log(out_t), 1).data.cpu().numpy()
-            pred_unk = -torch.sum(out_t * torch.log(out_t), 1)
-            ind_unk = np.where(entr > thr)[0]
 
-            pred[ind_unk] = open_class
+            if entropy:
+                pred_unk = -torch.sum(out_t * torch.log(out_t), 1)
+
+            elif prob:
+                pred_unk = -torch.max(out_t, dim=-1)[0]
+
+            elif logit:
+                pred_unk = -torch.max(logit_t, dim=-1)[0]
+
             correct += pred.eq(label_t.data).cpu().sum()
             pred = pred.cpu().numpy()
             k = label_t.data.size()[0]
@@ -125,9 +132,11 @@ def test_pretrained(step, dataset_test, name, n_share, G,
     if open:
         Y_test = label_binarize(label_all, classes=[i for i in class_list])
         roc = roc_auc_score(Y_test[:, -1], anomaly_score)
-        #roc_softmax = roc_auc_score(Y_test[:, -1], -np.max(pred_all, axis=1))
+
     else:
         roc = 0.0
+
+
     logger = logging.getLogger(__name__)
     logging.basicConfig(filename=name, format="%(message)s")
     logger.setLevel(logging.INFO)
@@ -137,5 +146,8 @@ def test_pretrained(step, dataset_test, name, n_share, G,
               "acc close all %s" % float(acc_close_all),
               "roc %s"% float(roc)]
     logger.info(output)
+    # print('roc option: entropy: {} max probability: {} max logit: {}'.format(entropy, prob, logit))
+    # print('all mean: {}, inlier mean:{}, outlier:mean {}'.format(anomaly_score.mean(), anomaly_score[Y_test[:, -1]==0].mean(), anomaly_score[Y_test[:, -1]==1].mean()))
     print(output)
+
     return acc_close_all, roc
