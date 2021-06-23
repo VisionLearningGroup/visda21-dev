@@ -36,11 +36,13 @@ The script extracts images into the following directories:
 <root>/val_data/imagenet_c_and_r/*
 <root>/val_data/imagenet_o/*
 <root>/val_data/objectnet/*
-```
+``` 
 
 ### Test Data :
 
 Test Data that would be available later and used for final evaluations would be a set of images similar to the above datasets.
+
+Note that labels provided for validation data allow for evaluation and tuning any model hyperparameters and as such those labels should not be used for training. The contest leaderboard based on validation results could be different from the final leaderboard based on test results.
 
 ## Evaluation Metrics
 
