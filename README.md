@@ -31,11 +31,16 @@ Filelists (which contain a list of `<image_path> <class_label>`) for each can be
 
 Classes that do not overlap with the classes in Imagenet have been given a class-label of 1000.
 
+The script extracts images into the following directories:
 ```
 <root>/val_data/imagenet_c_and_r/*
 <root>/val_data/imagenet_o/*
 <root>/val_data/objectnet/*
 ```
+
+### Test Data :
+
+Test Data that would be available later and used for final evaluations would be a set of images similar to the above datasets.
 
 ## Evaluation Metrics
 
