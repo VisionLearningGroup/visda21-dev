@@ -20,7 +20,7 @@ parser.add_argument('--config', type=str, default='./configs/image_to_objectnet.
                     help='/path/to/config/file')
 
 parser.add_argument('--source_data', type=str,
-                    default='/research/diva2/donhk/imagenet/ILSVRC2012_train/',
+                    default='./ILSVRC2012_train/',
                     help='path to source list')
 parser.add_argument('--target_data', type=str,
                     default='./data_loader/filelist/objectnet_filelist.txt',

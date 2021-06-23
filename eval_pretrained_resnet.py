@@ -21,7 +21,7 @@ parser.add_argument('--config', type=str, default='./configs/image_to_imagenet_c
                     help='/path/to/config/file')
 
 parser.add_argument('--source_data', type=str,
-                    default='/research/diva2/donhk/imagenet/ILSVRC2012_train/',
+                    default='./ILSVRC2012_train/',
                     help='path to source list')
 parser.add_argument('--target_data', type=str,
                     default='./data_loader/filelist/imagenet_c_and_r_filelist.txt',
@@ -50,7 +50,7 @@ parser.add_argument('--multi', type=float,
 parser.add_argument("--entropy",
                     default=False, action='store_true')
 parser.add_argument("--logit",
-                    default=True, action='store_true')
+                    default=False, action='store_true')
 parser.add_argument("--probability",
                     default=False, action='store_true')
 
