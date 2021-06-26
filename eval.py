@@ -52,18 +52,24 @@ def test(step, dataset_test, name, n_share, G, Cs,
                 per_class_num[i] += float(len(t_ind[0]))
             size += k
 
+
+            if batch_idx == 0:
+                prediction = pred
+            else:
+                prediction = np.r_[prediction, pred]
+
             if open:
                 label_t = label_t.data.cpu().numpy()
                 if batch_idx == 0:
                     label_all = label_t
-                    anomal_score = pred_unk.data.cpu().numpy()
+                    anomaly_score = pred_unk.data.cpu().numpy()
                 else:
-                    anomal_score = np.r_[anomal_score, pred_unk.data.cpu().numpy()]
+                    anomaly_score = np.r_[anomaly_score, pred_unk.data.cpu().numpy()]
                     label_all = np.r_[label_all, label_t]
 
     if open:
         Y_test = label_binarize(label_all, classes=[i for i in class_list])
-        roc = roc_auc_score(Y_test[:, -1], anomal_score)
+        roc = roc_auc_score(Y_test[:, -1], anomaly_score)
     else:
         roc = 0.0
 
@@ -77,6 +83,7 @@ def test(step, dataset_test, name, n_share, G, Cs,
               "roc %s"% float(roc)]
     logger.info(output)
     print(output)
+    gen_submission_files('./submission.txt', dataset_test.dataset.imgs, prediction, anomaly_score)
     return acc_close_all, roc
 
 
@@ -109,7 +116,7 @@ def test_pretrained(step, dataset_test, name, n_share, G,
             elif prob:
                 pred_unk = -torch.max(out_t, dim=-1)[0]
 
-            elif logit:
+            else:
                 pred_unk = -torch.max(logit_t, dim=-1)[0]
 
             correct += pred.eq(label_t.data).cpu().sum()
@@ -121,6 +128,13 @@ def test_pretrained(step, dataset_test, name, n_share, G,
                 per_class_correct[i] += float(len(correct_ind[0]))
                 per_class_num[i] += float(len(t_ind[0]))
             size += k
+
+            if batch_idx == 0:
+                prediction = pred
+            else:
+                prediction = np.r_[prediction, pred]
+
+
             if open:
                 label_t = label_t.data.cpu().numpy()
                 if batch_idx == 0:
@@ -132,6 +146,7 @@ def test_pretrained(step, dataset_test, name, n_share, G,
     if open:
         Y_test = label_binarize(label_all, classes=[i for i in class_list])
         roc = roc_auc_score(Y_test[:, -1], anomaly_score)
+
 
     else:
         roc = 0.0
@@ -149,5 +164,20 @@ def test_pretrained(step, dataset_test, name, n_share, G,
     # print('roc option: entropy: {} max probability: {} max logit: {}'.format(entropy, prob, logit))
     # print('all mean: {}, inlier mean:{}, outlier:mean {}'.format(anomaly_score.mean(), anomaly_score[Y_test[:, -1]==0].mean(), anomaly_score[Y_test[:, -1]==1].mean()))
     print(output)
+    gen_submission_files('./submission.txt', dataset_test.dataset.imgs, prediction, anomaly_score)
 
     return acc_close_all, roc
+
+
+
+def gen_submission_files(outfile, image_names, prediction, anomaly_score):
+
+    f = open(outfile, 'w')
+
+    for img, pred, score in zip(image_names, prediction, anomaly_score):
+
+        img = img[img.find('/val_data/'):]
+        f.write('{} {} {}\n'.format(img, pred, score))
+
+    f.close()
+

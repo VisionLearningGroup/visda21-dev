@@ -50,7 +50,7 @@ parser.add_argument('--multi', type=float,
 parser.add_argument("--entropy",
                     default=False, action='store_true')
 parser.add_argument("--logit",
-                    default=False, action='store_true')
+                    default=True, action='store_true')
 parser.add_argument("--probability",
                     default=False, action='store_true')
 

@@ -6,6 +6,7 @@ from sklearn.metrics import roc_auc_score
 def return_label_list(file):
     tmp = open(file, "r")
     lines = tmp.readlines()
+    lines = [line[line.find('/val_data/'):] for line in lines]
     labels = [int(line.strip().split(" ")[1]) for line in lines]
     file_name = [line.strip().split(" ")[0] for line in lines]
     return labels, file_name
@@ -14,6 +15,7 @@ def return_label_list(file):
 def return_result_list(file):
     tmp = open(file, "r")
     lines = tmp.readlines()
+    lines = [line[line.find('/val_data/'):] for line in lines]
     labels = [int(line.strip().split(" ")[1]) for line in lines]
     file_name = [line.strip().split(" ")[0] for line in lines]
     anomal_lists = [float(line.strip().split(" ")[2]) for line in lines]
