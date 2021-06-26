@@ -29,6 +29,11 @@ def check_file_name(file1, file2):
 
 
 def acc_perclass(gt, submit, output="result.txt", class_known=1000):
+    ## gt file has the same format as files under val_filelists.
+    ## submission file needs to have the following format,
+    ## [filename] [prediction of closed class index] [anomaly score]
+    ## Note that higher anomaly score means the sample is more likely an outlier.
+
     gt_labels, file_gt = return_label_list(gt)
     submit_labels, file_sb, anomal_sb = return_result_list(submit)
     try:
