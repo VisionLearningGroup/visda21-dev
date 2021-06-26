@@ -31,11 +31,11 @@ Filelists (which contain a list of `<image_path> <class_label>`) for each can be
 
 Classes that do not overlap with the classes in ImageNet have been given a class-label of 1000.
 
-The images need to be stored under ./data directory. 
+The images need to be stored under ./val_data directory. 
 ```
-data/val_data/imagenet_c_and_r/*
-data/val_data/imagenet_o/*
-data/val_data/objectnet/*
+./val_data/imagenet_c_and_r/*
+./val_data/imagenet_o/*
+./val_data/objectnet/*
 ``` 
 
 ### Test Data :
