@@ -1,9 +1,9 @@
 data:
   dataset:
     name: imagenet_to_objectnet
-    n_share: 27 # number of classes to be shared
-    n_source_private: 973 # number of classes in source private domain
-    n_total: 1029 # number of classes in total
+    n_share: 30 # number of classes to be shared
+    n_source_private: 970 # number of classes in source private domain
+    n_total: 1001 # number of classes in total
 
   dataloader:
     class_balance: true #

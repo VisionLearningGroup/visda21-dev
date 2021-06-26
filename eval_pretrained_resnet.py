@@ -21,7 +21,7 @@ parser.add_argument('--config', type=str, default='./configs/image_to_imagenet_c
                     help='/path/to/config/file')
 
 parser.add_argument('--source_data', type=str,
-                    default='/research/diva2/donhk/imagenet/ILSVRC2012_train/',
+                    default='./ILSVRC2012_train/',
                     help='path to source list')
 parser.add_argument('--target_data', type=str,
                     default='./data_loader/filelist/imagenet_c_and_r_filelist.txt',
@@ -47,7 +47,12 @@ parser.add_argument("--save_path", type=str,
 parser.add_argument('--multi', type=float,
                     default=0.1,
                     help='weight factor for adaptation')
-
+parser.add_argument("--entropy",
+                    default=False, action='store_true')
+parser.add_argument("--logit",
+                    default=False, action='store_true')
+parser.add_argument("--probability",
+                    default=False, action='store_true')
 
 args = parser.parse_args()
 
@@ -97,5 +102,5 @@ model_ft = models.resnet50(pretrained=True).cuda()
 ndata = target_folder.__len__()
 
 acc_o, h_score = test_pretrained(0, test_loader, logname, n_share, model_ft,
-                                 open=open, entropy=True, thr=conf.train.thr)
+                                 open=open, entropy=args.entropy, thr=conf.train.thr, prob=args.probability, logit=args.logit)
 

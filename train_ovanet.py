@@ -20,7 +20,7 @@ parser.add_argument('--config', type=str, default='./configs/image_to_objectnet.
                     help='/path/to/config/file')
 
 parser.add_argument('--source_data', type=str,
-                    default='/research/diva2/donhk/imagenet/ILSVRC2012_train/',
+                    default='./ILSVRC2012_train/',
                     help='path to source list')
 parser.add_argument('--target_data', type=str,
                     default='./data_loader/filelist/objectnet_filelist.txt',
@@ -29,7 +29,7 @@ parser.add_argument('--log-interval', type=int,
                     default=100,
                     help='how many batches before logging training status')
 parser.add_argument('--exp_name', type=str,
-                    default='image_to_image_c_r',
+                    default='ovanet',
                     help='/path/to/config/file')
 parser.add_argument('--network', type=str,
                     default='resnet50',

@@ -3,7 +3,7 @@ data:
     name: imagenet_to_c_and_r
     n_share: 1000 # number of classes to be shared
     n_source_private: 0 # number of classes in source private domain
-    n_total: 1000 # number of classes in total
+    n_total: 1001 # number of classes in total
 
   dataloader:
     class_balance: true #
