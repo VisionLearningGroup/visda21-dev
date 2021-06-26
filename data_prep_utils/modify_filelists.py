@@ -1,6 +1,6 @@
 import os
 
-root = os.path.abspath('.')
+root = "./data"#os.path.abspath('.')
 
 
 for filelist in os.listdir('val_filelists'):
