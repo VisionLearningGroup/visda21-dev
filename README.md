@@ -33,9 +33,9 @@ Classes that do not overlap with the classes in ImageNet have been given a class
 
 The script extracts images into the following directories:
 ```
-<root>/val_data/imagenet_c_and_r/*
-<root>/val_data/imagenet_o/*
-<root>/val_data/objectnet/*
+data/val_data/imagenet_c_and_r/*
+data/val_data/imagenet_o/*
+data/val_data/objectnet/*
 ``` 
 
 ### Test Data :
