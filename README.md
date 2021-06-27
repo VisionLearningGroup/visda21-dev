@@ -50,6 +50,14 @@ Note that labels provided for validation data allow for evaluation and tuning an
 2. [AUROC](https://github.com/VisionLearningGroup/visda21-dev/blob/6b08d9600418d5a413d6f13459786a298ea6df87/eval.py#L76) to evaluate separation between known and unknown classes
 
 
+## Submission Format
+The sample of submission file is stored in ./submission/sample_submit.txt.
+Each line shows a filename, class prediction (closed-set), and anomaly score.
+Corresponding gt file will be the provided filelist.
+eval_submission.py will be our temporary evaluation script.
+See these files before creating submission files.
+
+
 ## Baselines
 
 
