@@ -23,7 +23,8 @@ def return_result_list(file):
 def check_file_name(file1, file2):
     for i, fil_1 in enumerate(file1):
         fil_2 = file2[i]
-        if fil_1 not in fil_2:
+        if fil_2 not in fil_1:
+            print(fil_1, fil_2)
             return False
     return True
 
