@@ -175,8 +175,6 @@ def gen_submission_files(outfile, image_names, prediction, anomaly_score):
     f = open(outfile, 'w')
 
     for img, pred, score in zip(image_names, prediction, anomaly_score):
-
-        img = img[img.find('/val_data/'):]
         f.write('{} {} {}\n'.format(img, pred, score))
 
     f.close()
