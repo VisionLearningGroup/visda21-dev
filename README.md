@@ -97,5 +97,5 @@ python train_ovanet.py --config ./configs/image_to_imagenet_c_r_o.yaml --source_
 
 |Target Dataset | Accuracy | AUROC  |
 |:---: | :---: | :---:|
-| ObjectNet |   21.7 | 54.8 |
-| ImageNet-R,C,O| 35.3 | 15.3 |
+| ObjectNet |   22.4 | 54.1 |
+| ImageNet-R,C,O| 35.6 | 15.8 |
