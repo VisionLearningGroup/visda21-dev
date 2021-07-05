@@ -75,7 +75,7 @@ The adapted_pred.txt will be used to rank participants.
 
 **Submission Format**
 
-The sample of submission file is stored in `./submission/sample_submit.txt` .
+The sample of submission file is stored in `./submission/source_only_pred.txt` .
 Each line shows a filename, class prediction (closed-set), and anomaly score.
 Corresponding gt file will be the provided filelist.
 eval_submission.py will be our temporary evaluation script.
