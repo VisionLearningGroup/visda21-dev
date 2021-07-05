@@ -1,5 +1,9 @@
 
 ## [Visual Domain Adaptation Challenge (VISDA-21)](http://ai.bu.edu/visda-2021/)
+## Updates
+***07/03/2021***
+1. Add instructions on submission to leaderboard.
+2. Change source-only evaluation and OVANet training following the format of leaderboard submission. Target data is changed to be the unified list of imagenet-r-c-o and objectron.
 
 
 ## Dataset Preparation
@@ -50,12 +54,33 @@ Note that labels provided for validation data allow for evaluation and tuning an
 2. [AUROC](https://github.com/VisionLearningGroup/visda21-dev/blob/6b08d9600418d5a413d6f13459786a298ea6df87/eval.py#L76) to evaluate separation between known and unknown classes
 
 
-## Submission Format
-The sample of submission file is stored in ./submission/sample_submit.txt.
+## Submission
+
+**Submission for Validation Leaderboard**
+
+During validation phase, we open a validation leaderboard to let participants know the process of submission and other teams' performances.
+
+During validation phase, we utilize the whole imagenet-r-c-o and objectnet as the target domain.
+`objectnet_imagenet_c_r_o_filelist.txt` will be our groundtruth file.
+Then, when submitting to the validation leaderboard, ***Please use the objectnet_imagenet_c_r_o_filelist.txt as a target domain to train your model.***
+This is to compare the validation submission in a fair way. (3) in Baselines are the correct way of training during validation phase.
+
+Participants will need to submit ***two corresponding prediction files, source_only_pred.txt and adapt_pred.txt***.
+The source only prediction file needs to contain the prediction produced by a model trained only with source samples, i.e, source imagenet samples.
+The adapt file will be predictions of adapted model.
+
+Note that the source only prediction file will be collected to see the gap between source only and adapted models.
+The adapted_pred.txt will be used to rank participants.
+
+
+**Submission Format**
+
+The sample of submission file is stored in `./submission/sample_submit.txt` .
 Each line shows a filename, class prediction (closed-set), and anomaly score.
 Corresponding gt file will be the provided filelist.
 eval_submission.py will be our temporary evaluation script.
 See these files before creating submission files.
+
 
 
 ## Baselines
@@ -67,14 +92,27 @@ See these files before creating submission files.
 
 <imagenet_data_path> should be specified.
 
-(1) ImageNet -> ObjectNet + ImageNet-C,R,O:
+(1) ImageNet -> ObjectNet:
+```
+python eval_pretrained_resnet.py --config ./configs/image_to_objectnet.yaml --source_data <imagenet_data_path>/ILSVRC2012_train/ --target_data ./data_prep_utils/val_filelists/objectnet_filelist.txt
+```
 
-python eval_pretrained_resnet.py --config ./configs/image_to_objectnet_imagenet_c_r_o.yaml --source_data <imagenet_data_path>/ILSVRC2012_train/ --target_data ./val_filelists/objectnet_c_r_o.txt --logit
+(2) ImageNet -> ImageNet-C,R,O:
 
+```
+python eval_pretrained_resnet.py --config ./configs/image_to_imagenet_c_r_o.yaml --source_data <imagenet_data_path>/ILSVRC2012_train/ --target_data ./data_prep_utils/val_filelists/imagenet_c_r_o_filelist.txt
+```
 
+(3) ImageNet -> ImageNet-C,R,O and ObjectNet:
+
+```
+python eval_pretrained_resnet.py --config ./configs/image_to_objectnet_imagenet_c_r_o.yaml --source_data <imagenet_data_path>/ILSVRC2012_train/ --target_data ./data_prep_utils/val_filelists/objectnet_imagenet_c_r_o_filelist.txt
+```
 
 |Target Dataset | Accuracy | AUROC  |
 |:---: | :---: | :---:|
+| ObjectNet |21.6 | 55.5 |
+| ImageNet-R,C,O|  36.0 | 11.0 |
 | ObjectNet + ImageNet-R,C,O | 32.7 | 51.0 |
 
 
@@ -85,9 +123,25 @@ In the paper, OVANet has one parameter (multi) to be tuned.
 
 (1) ImageNet -> ObjectNet +  ImageNet-C,R,O:
 
-python train_ovanet.py --config ./configs/image_to_objectnet_imagenet_c_r_o.yaml --source_data <imagenet_data_path>/ILSVRC2012_train/ --target_data ./val_filelists/objectnet_c_r_o.txt --multi 0.01 
+```
+python train_ovanet.py --config ./configs/image_to_objectnet.yaml --source_data <imagenet_data_path>/ILSVRC2012_train/ --target_data ./data_prep_utils/val_filelists/objectnet_filelist.txt 
+```
+
+(2) ImageNet -> ImageNet-C,R,O:
+
+```
+python train_ovanet.py --config ./configs/image_to_imagenet_c_r_o.yaml --source_data <imagenet_data_path>/ILSVRC2012_train/ --target_data ./data_prep_utils/val_filelists/imagenet_c_r_o_filelist.txt
+```
+
+(3) ImageNet -> ImageNet-C,R,O and ObjectNet:
+
+```
+python train_ovanet.py --config ./configs/image_to_objectnet_imagenet_c_r_o.yaml --source_data <imagenet_data_path>/ILSVRC2012_train/ --target_data ./data_prep_utils/val_filelists/objectnet_imagenet_c_r_o_filelist.txt
+```
 
 |Target Dataset | Accuracy | AUROC  |
 |:---: | :---: | :---:|
+| ObjectNet |   22.4 | 54.1 |
+| ImageNet-R,C,O| 35.6 | 15.8 |
 | ObjectNet + ImageNet-R,C,O|   32.6 | 48.1 |
 

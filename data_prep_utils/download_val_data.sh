@@ -6,5 +6,5 @@ echo "Unzipping"
 unzip -qq val_data.zip
 echo "Removing zip"
 rm val_data.zip
-python data_prep_utils/modify_filelists.py
+#python data_prep_utils/modify_filelists.py
 
