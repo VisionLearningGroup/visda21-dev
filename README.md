@@ -106,13 +106,14 @@ python eval_pretrained_resnet.py --config ./configs/image_to_imagenet_c_r_o.yaml
 (3) ImageNet -> ImageNet-C,R,O and ObjectNet:
 
 ```
-python eval_pretrained_resnet.py --config ./configs/image_to_imagenet_c_r_o.yaml --source_data <imagenet_data_path>/ILSVRC2012_train/ --target_data ./data_prep_utils/val_filelists/objectnet_imagenet_c_r_o_filelist.txt
+python eval_pretrained_resnet.py --config ./configs/image_to_objectnet_imagenet_c_r_o.yaml --source_data <imagenet_data_path>/ILSVRC2012_train/ --target_data ./data_prep_utils/val_filelists/objectnet_imagenet_c_r_o_filelist.txt
 ```
 
 |Target Dataset | Accuracy | AUROC  |
 |:---: | :---: | :---:|
 | ObjectNet |21.6 | 55.5 |
 | ImageNet-R,C,O|  36.0 | 11.0 |
+| ObjectNet + ImageNet-R,C,O | 32.7 | 51.0 |
 
 ### [OVANet](https://arxiv.org/pdf/2104.03344.pdf)
 
@@ -134,10 +135,11 @@ python train_ovanet.py --config ./configs/image_to_imagenet_c_r_o.yaml --source_
 (3) ImageNet -> ImageNet-C,R,O and ObjectNet:
 
 ```
-python train_ovanet.py --config ./configs/image_to_imagenet_c_r_o.yaml --source_data <imagenet_data_path>/ILSVRC2012_train/ --target_data ./data_prep_utils/val_filelists/objectnet_imagenet_c_r_o_filelist.txt
+python train_ovanet.py --config ./configs/image_to_objectnet_imagenet_c_r_o.yaml --source_data <imagenet_data_path>/ILSVRC2012_train/ --target_data ./data_prep_utils/val_filelists/objectnet_imagenet_c_r_o_filelist.txt
 ```
 
 |Target Dataset | Accuracy | AUROC  |
 |:---: | :---: | :---:|
 | ObjectNet |   22.4 | 54.1 |
 | ImageNet-R,C,O| 35.6 | 15.8 |
+| ObjectNet + ImageNet-R,C,O|   32.6 | 48.1 |
