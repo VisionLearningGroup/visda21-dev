@@ -145,3 +145,17 @@ python train_ovanet.py --config ./configs/image_to_objectnet_imagenet_c_r_o.yaml
 | ImageNet-R,C,O| 35.6 | 15.8 |
 | ObjectNet + ImageNet-R,C,O|   32.6 | 48.1 |
 
+### Citation
+
+If you use data, code or its derivatives, please consider citing our tech report avaliable on <a href="https://arxiv.org/abs/2107.11011">arxiv</a>:
+
+```
+@misc{visda2021,
+      title={VisDA-2021 Competition Universal Domain Adaptation to Improve Performance on Out-of-Distribution Data}, 
+      author={Dina Bashkirova and Dan Hendrycks and Donghyun Kim and Samarth Mishra and Kate Saenko and Kuniaki Saito and Piotr Teterwak and Ben Usman},
+      year={2021},
+      eprint={2107.11011},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+```
