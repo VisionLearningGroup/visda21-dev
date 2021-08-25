@@ -53,6 +53,9 @@ Note that labels provided for validation data allow for evaluation and tuning an
 1. [Accuracy](https://github.com/VisionLearningGroup/visda21-dev/blob/6b08d9600418d5a413d6f13459786a298ea6df87/eval.py#L75) on 1000 classes in ImageNet
 2. [AUROC](https://github.com/VisionLearningGroup/visda21-dev/blob/6b08d9600418d5a413d6f13459786a298ea6df87/eval.py#L76) to evaluate separation between known and unknown classes
 
+## Corruption blacklist
+
+Participants shall not manually apply any of the corruptions present in ImageNet-C during training, namely Gaussian noise, Shot noise, Impulse noise, Defocus blur, Frosted Glass Blur, Motion blur, Zoom blur, Snow, Frost, Fog, Brightness, Contrast, Elastic, Pixelation and JPEG compression. 
 
 ## Submission
 
